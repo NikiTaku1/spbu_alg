@@ -97,7 +97,7 @@ class DatetimeGenerator:
             return date
 
     def _generate_time(self):
-        time = datetime.timedelta(minutes=(random.randrange(-120, 300)))
+        time = datetime.timedelta(minutes=(random.randrange(-180, 360)))
         return time
 
 
