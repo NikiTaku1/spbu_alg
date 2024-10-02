@@ -30,7 +30,7 @@ class SnilsGenerator:
             for x in range(0, 12)
         ]
 
-        cont = nums[0] * 1 + nums[1] * 2 + nums[2] * 3 + nums[4] * 4 + nums[5] * 5 + nums[6] * 6 + nums[8] * 7 + nums[9] * 8 + nums[10] * 9
+        cont = nums[0] * 9 + nums[1] * 8 + nums[2] * 7 + nums[4] * 6 + nums[5] * 5 + nums[6] * 4 + nums[8] * 3 + nums[9] * 2 + nums[10] * 1
 
         if cont in (100, 101):
             cont = '00'
