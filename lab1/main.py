@@ -103,7 +103,7 @@ if __name__ == "__main__":
             return
 
         compute(int(count_entry.get()), output_entry.get(), banks_p, systems_p)
-        messagebox.showinfo("Success", "Dataset saved")
+        messagebox.showinfo("Success", "Dataset saved successfully")
 
     calculate_button = tk.Button(compute_frame, text="Create database", command=handler)
     calculate_button.grid(row=2, columnspan=2, pady=10)

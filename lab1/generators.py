@@ -4,7 +4,7 @@ import datetime
 
 class PassportGenerator:
     def __init__(self):
-        self.used_keys = {}  # Словарь для отслеживания использованных серий
+        self.used_keys = {}
 
     def generate(self):
         key = self._generate_unique_key()
@@ -14,23 +14,24 @@ class PassportGenerator:
         return "{:04d}".format(key) + " {:06d}".format(self.used_keys[key])
 
     def _generate_unique_key(self):
-        # Генерация серии из 4 цифр по правилу регион + год
         key = (random.randrange(10**2 - 1) + 1) * 100 + (random.randrange(24))
         return key
 
 
 class SnilsGenerator:
+    def __init__(self):
+        self.nums = ''
 
     def generate(self):
   
-        nums = [
+        self.nums = [
             random.randint(0, 9) if x != 3 and x != 7 and x != 11
             else '-' if x == 3 or x == 7
             else ' '
             for x in range(0, 12)
         ]
 
-        cont = nums[0] * 9 + nums[1] * 8 + nums[2] * 7 + nums[4] * 6 + nums[5] * 5 + nums[6] * 4 + nums[8] * 3 + nums[9] * 2 + nums[10] * 1
+        cont = self.nums[0] * 9 + self.nums[1] * 8 + self.nums[2] * 7 + self.nums[4] * 6 + self.nums[5] * 5 + self.nums[6] * 4 + self.nums[8] * 3 + self.nums[9] * 2 + self.nums[10] * 1
 
         if cont in (100, 101):
             cont = '00'
@@ -43,8 +44,8 @@ class SnilsGenerator:
         elif cont < 10:
             cont = '0' + str(cont)
 
-        nums.append(str(cont))
-        return ''.join([str(x) for x in nums])
+        self.nums.append(str(cont))
+        return ''.join([str(x) for x in self.nums])
 
 
 class NamesGenerator:
