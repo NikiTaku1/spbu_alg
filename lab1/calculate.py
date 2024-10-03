@@ -111,7 +111,10 @@ def compute(n, out_file, banks_p, systems_p):
     for i in range(n):
         data["Name"].append(namesGen[random.randrange(2)].generate()) 
         data["Passport"].append(passportGen.generate())
-        data["Snils"].append(snilsGen.generate())
+        snilscheck = snilsGen.generate()
+        while snilscheck in data["Snils"]:
+            snilscheck = snilsGen.generate()
+        data["Snils"].append(snilscheck)
 
     for i in range(n):
         
