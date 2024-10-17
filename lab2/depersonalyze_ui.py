@@ -2,7 +2,7 @@ import tkinter as tk
 
 from depersonalyze import *
 
-cols = ["Passport", "Doctor", "Symptoms", "Analysis", "DateStart", "Price", "Card"]
+cols = ["Passport", "Doctor", "DateStart", "Price", "Card"]
 
 
 def run_function():
@@ -23,7 +23,7 @@ def run_function():
     result_text.insert(
         tk.END,
         f"K-anonimity: {k_anon}\n"
-        + "\n".join(f"Bad value {k}: {v/len(df)*100}%" for k, v in bad1.items())
+        + "\n".join(f"Bad value {k}: {round(v/len(df)*100, ndigits = 3)}%" for k, v in bad1.items())
         + "\n",
     )
 
@@ -39,16 +39,16 @@ def run_function():
     res1 = res.loc[mask]
 
     res2: pandas.DataFrame
+    cols1 = list(filter(lambda name: checkboxes_vars[name].get(), cols))
     ones1 = ones.drop("Count", axis=1)
     df_index = df.set_index(cols1).index
     ones1_index = ones1.set_index(cols1).index
     mask = ~df_index.isin(ones1_index)
     res2 = df.loc[mask]
 
-
-    res.to_csv(f"unique_types_and_counts.csv", index=False)
     ones.to_csv(f"excess.csv", index=False)
-    res1.to_csv(f"types_without_excess.csv", index=False)
+    df.to_csv(f"full_anon.csv", index=False)
+    res1.to_csv(f"types.csv", index=False)
     res2.to_csv(f"full_without_excess.csv", index=False)
 
     
@@ -61,7 +61,7 @@ root.title("Tkinter Interface")
 input_label = tk.Label(root, text="Input")
 input_label.grid(row=0, column=2, sticky=tk.W)
 input_entry = tk.Entry(root)
-input_entry.grid(row=0, column=4, padx=10, pady=5)
+input_entry.grid(row=0, column=3, padx=0, pady=5)
 
 # Строка 2: Чекбоксы
 checkboxes_vars = {}
@@ -69,7 +69,7 @@ for i, col in enumerate(cols):
     checkbox_var = tk.IntVar()
     checkboxes_vars[col] = checkbox_var
     checkbox = tk.Checkbutton(root, text=col, variable=checkbox_var)
-    checkbox.grid(row=1, column=i, padx=5, pady=5)
+    checkbox.grid(row=1, column=i, padx=40, pady=5)
 
 # Строка 3: Кнопка "Run"
 run_button = tk.Button(root, text="Run", command=run_function)
@@ -82,9 +82,3 @@ result_text.grid(row=3, column=0, columnspan=7, padx=10, pady=5)
 
 # Запускаем главный цикл событий
 root.mainloop()
-
-
-
-## Анон -> убираем некоторые k=1 -> считаем общую k -> вывод результатов
-## или
-## Анон -> считаем общую k -> убираем некоторые k=1 -> вывод результатов
