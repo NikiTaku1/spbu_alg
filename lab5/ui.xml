@@ -91,7 +91,7 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>F(X, Y)</string>
+         <string>f(x1, x2)</string>
         </property>
        </widget>
       </item>
@@ -310,9 +310,9 @@
       </rect>
      </property>
      <property name="plainText">
-      <string>Лучшая частица будет тут.
+      <string>Лучшая частица и значение функции будет здесь.
 
-Для начала работы программы введите данные и нажмите на кнопку &quot;Сгенерировать рой&quot;. Далее, нажмите кнопку &quot;Рассчитать&quot; - и получите результат, соответствующий исходным параметрам.</string>
+Введите данные и нажмите кнопку &quot;Сгенерировать рой&quot;. Далее, нажмите кнопку &quot;Рассчитать&quot; - и получите результат.</string>
      </property>
     </widget>
    </widget>
